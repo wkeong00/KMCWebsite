@@ -1,71 +1,90 @@
-# Getting Started with Create React App
+# KMC 63 Trading — Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+KMC 63 Trading 官网。业务包括：
 
-## Available Scripts
+- 不锈钢 / 铝合金烤盘定制（Bun Tray、Steamer、Trolley 等）
+- 烤盘喷漆涂层与翻新（PTFE 水性双层不粘涂层）
+- 烤盘与烘焙设备维护服务
 
-In the project directory, you can run:
+线上域名：<https://kmcbakingtray.com>
 
-### `npm start`
+## 技术栈
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React 18
+- Create React App (`react-scripts` 5)
+- React Router 6
+- 原生 CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 本地开发
 
-### `npm test`
+### 环境要求
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js **24.x**（与 Vercel 构建环境一致）
+- npm 11+
 
-### `npm run build`
+项目已通过 `engines.node` 指定 Node 24。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 安装与启动
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```powershell
+cd C:\Users\wkeong\Desktop\Workprojects\KMC-draft
+npm ci --legacy-peer-deps
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+打开：
 
-### `npm run eject`
+```
+http://localhost:3000
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 生产构建
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```powershell
+npm run build
+npx serve -s build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 页面路由
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| 页面 | 路由 |
+|---|---|
+| 首页 | `/` |
+| 关于我们 | `/aboutUs` |
+| 服务 | `/Services` |
+| 产品 | `/Products` |
 
-## Learn More
+## 设计状态
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+设计决策已确认：深青绿 + 铜色、Space Grotesk / Inter / Noto Sans SC、服务页 EN / 中文 Tab、产品页轻量详情 Modal。当前进入 Phase 1。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 文档
 
-### Code Splitting
+- [前端重设计方案](docs/FRONTEND_REDESIGN_PLAN.md)
+- [本地运行指南](docs/LOCAL_DEV_GUIDE.md)
+- [内容与素材准备清单](docs/CONTENT_CHECKLIST.md)
+- [文档索引](docs/README.md)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 部署
 
-### Analyzing the Bundle Size
+代码仓库：<https://github.com/wkeong00/KMCWebsite>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+新部署使用 Vercel，导入该仓库并选择 `main` 为生产分支。根目录的 `vercel.json` 已配置：
 
-### Making a Progressive Web App
+- 框架：Create React App
+- 安装：`npm ci --legacy-peer-deps`
+- 构建：`npm run build`
+- 输出目录：`build`
+- SPA 路由回退，支持直接访问及刷新 `/aboutUs`、`/Services`、`/Products`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+在 Vercel 的 Production / Preview 环境配置 `REACT_APP_WEB3FORMS_KEY`（参考 `.env.example`）；不要将 `.env.local` 提交到仓库。环境变量修改后需要重新部署。
 
-### Advanced Configuration
+先使用 `.vercel.app` 地址验收，再迁移 `kmcbakingtray.com` 与 `www` 的 DNS。旧 GitHub Pages 在切换完成前保持运行；本地 remote 的修改不会自动迁移域名或停止旧站。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`gh-pages` 脚本和根目录 `CNAME` 暂时保留作迁移参考。**不要运行 `npm run deploy`**：它现在会向新仓库的 `gh-pages` 分支推送，而不是更新旧站。日后通过推送到 `main` 触发 Vercel 部署。
 
-### Deployment
+## 联系信息
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# KMC-draft" 
+- Email: kmc63trading@gmail.com
+- Phone / WhatsApp: +60163585326
+- Address: No.1, Jalan Com Industrial Park 2/1, Com Industrial Park 2, Kawasan Perindustrian Kg. Baru Balakong, 43300 Seri Kembangan, Selangor Darul Ehsan, Malaysia
