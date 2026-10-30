@@ -21,7 +21,7 @@ export const serviceCopy = {
       description: 'Baking trays made around your products and production needs. Bring us your dimensions, a drawing or a sample, and let’s work through the details.',
       features: ['Custom dimensions', 'Different shapes and patterns', 'Stainless steel & aluminium alloy', 'Groove counts & tray profiles'],
       tags: ['Stainless steel', 'Aluminium alloy', 'Custom shapes'],
-      caption: 'Custom baking tray examples'
+      caption: 'Custom tray design illustration'
     },
     maintenance: {
       eyebrow: '03 / Maintenance & repair',
@@ -52,7 +52,7 @@ export const serviceCopy = {
       description: '根据您的产品和生产需求制作烤盘。提供尺寸、图纸或样品，让我们一起讨论细节。',
       features: ['接受不同尺寸订做', '不同形状与图案', '白钢与铝合金材料', '槽数与烤盘形状定制'],
       tags: ['白钢', '铝合金', '定制形状'],
-      caption: '客制化烤盘示例'
+      caption: '客制化烤盘设计示意'
     },
     maintenance: {
       eyebrow: '03 / 维护与维修',

@@ -1,14 +1,14 @@
-import JS20108 from '../Assets/optimized/JS20108.webp';
-import JS20208 from '../Assets/optimized/JS20208.webp';
-import JS20308 from '../Assets/optimized/JS20308.webp';
-import JS30108 from '../Assets/optimized/JS30108.webp';
-import JS30208 from '../Assets/optimized/JS30208.webp';
-import JS30308 from '../Assets/optimized/JS30308.webp';
-import JSGS01 from '../Assets/optimized/JS-GS01-Steamer.webp';
-import JSGS02 from '../Assets/optimized/JS-GS02.webp';
-import Trolley from '../Assets/optimized/Trolley.webp';
-import thirdgen from '../Assets/optimized/thirdgen.webp';
-import fourth from '../Assets/optimized/fourth.webp';
+import JS20108 from '../Assets/enhanced/JS20108.jpg';
+import JS20208 from '../Assets/enhanced/JS20208.jpg';
+import JS20308 from '../Assets/enhanced/JS20308.jpg';
+import JS30108 from '../Assets/enhanced/JS30108.jpg';
+import JS30208 from '../Assets/enhanced/JS30208.jpg';
+import JS30308 from '../Assets/enhanced/JS30308.jpg';
+import JSGS01 from '../Assets/enhanced/JS-GS01-Steamer.jpg';
+import JSGS02 from '../Assets/enhanced/JS-GS02.jpg';
+import Trolley from '../Assets/enhanced/Trolley.jpg';
+import thirdgen from '../Assets/enhanced/thirdgen.png';
+import fourth from '../Assets/enhanced/fourth.png';
 
 // Keep stable IDs: model codes in the existing catalog can repeat.
 export const products = [{

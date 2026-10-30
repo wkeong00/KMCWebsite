@@ -31,26 +31,13 @@
 }
 
 .brand img {
-  width: 48px;
-  height: 48px;
+  display: block;
+  width: 264px;
+  height: auto;
   object-fit: contain;
 }
 
-.brand>span {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: .95rem;
-  letter-spacing: .045em;
-}
 
-.brand small {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: .48rem;
-  letter-spacing: .16em;
-  margin-top: 5px;
-}
 
 .navbar__links {
   display: flex;
@@ -983,9 +970,7 @@
 }
 
 .brand--footer img {
-  background: white;
-  border-radius: 50%;
-  padding: 2px;
+  width: min(264px, 100%);
 }
 
 .footer__intro>p {
@@ -1253,13 +1238,23 @@
   color: var(--brand-700);
 }
 
+#coating .service-detail__grid {
+  align-items: start;
+}
+
 .coating-examples {
   display: grid;
   gap: 16px;
 }
 
 .coating-examples .media {
-  aspect-ratio: 2.4;
+  aspect-ratio: 3 / 2;
+  background: #f4f5f4;
+}
+
+.coating-examples .media img {
+  padding: 0;
+  object-fit: contain;
 }
 
 .coating-examples figcaption {
@@ -1304,8 +1299,21 @@
 }
 
 .custom-image {
-  background: white;
-  aspect-ratio: 1.15;
+  background: #f4f5f4;
+  aspect-ratio: 3 / 2;
+}
+
+.custom-image img {
+  object-fit: contain;
+  padding: 0;
+}
+
+.maintenance-image {
+  aspect-ratio: 3 / 2;
+}
+
+.maintenance-image img {
+  object-position: center;
 }
 
 .service-tags {
@@ -1845,16 +1853,11 @@
 @media(max-width:767px) {
   .navbar__inner {
     height: 72px;
+    gap: 16px;
   }
   .brand img {
-    width: 40px;
-    height: 40px;
-  }
-  .brand>span {
-    font-size: .8rem;
-  }
-  .brand small {
-    font-size: .4rem;
+    width: 210px;
+    height: auto;
   }
   .menu-toggle {
     width: 44px;
@@ -2207,10 +2210,10 @@
     gap: 12px;
   }
   .coating-examples .media {
-    aspect-ratio: 1.2;
+    aspect-ratio: 3 / 2;
   }
   .coating-examples .media img {
-    padding: 12px;
+    padding: 0;
   }
   .coating-examples figcaption {
     font-size: .6rem;
@@ -2226,7 +2229,7 @@
     font-size: .7rem;
   }
   .custom-image {
-    aspect-ratio: 1.4;
+    aspect-ratio: 3 / 2;
   }
   .service-detail .service-detail__grid>figure:first-child {
     order: 2;
@@ -2318,6 +2321,9 @@
 }
 
 @media(max-width:479px) {
+  .coating-examples {
+    grid-template-columns: 1fr;
+  }
   .product-grid {
     grid-template-columns: 1fr;
   }
@@ -2404,9 +2410,6 @@
   }
   .mobile-panel__top .brand {
     gap: 8px;
-  }
-  .mobile-panel__top .brand>span {
-    font-size: .7rem;
   }
   .mobile-panel nav a {
     min-height: 70px;

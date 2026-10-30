@@ -91,7 +91,7 @@ export default function ServicesPage() {
     <section id="custom" className="section surface service-detail">
       <div className="container service-detail__grid">
         <figure>
-          <div className="media media--product custom-image">
+          <div className="media custom-image">
             <img src={images.custom} alt={copy.custom.caption} loading="lazy" width="650" height="550" />
           </div>
           <figcaption className="image-caption">
@@ -143,7 +143,7 @@ export default function ServicesPage() {
           </button>
         </div>
         <figure>
-          <div className="media">
+          <div className="media maintenance-image">
             <img src={images.mixer} alt={copy.maintenance.caption} loading="lazy" width="650" height="450" />
           </div>
           <figcaption className="image-caption">

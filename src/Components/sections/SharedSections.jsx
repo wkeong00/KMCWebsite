@@ -27,7 +27,7 @@ export function ServiceCards() {
       </Link>
       <Link className="service-card" to="/Services#custom">
         <div className="service-card__image">
-          <img src={images.trays} alt="Custom fabricated rectangular trays stacked in the workshop" loading="lazy" decoding="async" width="600" height="390" />
+          <img src={images.trays} alt="Custom fabrication illustration: a stainless steel tray and measuring caliper on a workbench" loading="lazy" decoding="async" width="600" height="390" />
           <span className="service-card__number">02 / FABRICATION</span>
         </div>
         <div className="service-card__body">

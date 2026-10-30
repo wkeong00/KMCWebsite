@@ -65,8 +65,7 @@ function Brand({
   onClick
 }) {
   return <Link className={`brand ${footer ? 'brand--footer' : ''}`} to="/" aria-label="KMC 63 Trading home" onClick={onClick}>
-  <img src={images.logo} alt="" width="48" height="48" />
-  <span>KMC 63 TRADING<small>BAKING TRAYS & COATING</small></span>
+  <img src={footer ? images.logoLight : images.logo} alt="KMC 63 Trading" width="1120" height="210" />
   </Link>;
 }
 export function Navbar() {
