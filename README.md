@@ -86,5 +86,5 @@ npx serve -s build
 ## 联系信息
 
 - Email: kmc63trading@gmail.com
-- Phone / WhatsApp: +60163585326
+- Phone / WhatsApp: +60129802762
 - Address: No.1, Jalan Com Industrial Park 2/1, Com Industrial Park 2, Kawasan Perindustrian Kg. Baru Balakong, 43300 Seri Kembangan, Selangor Darul Ehsan, Malaysia

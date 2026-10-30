@@ -17,7 +17,7 @@
 
 ## 2. 联系方式
 
-- [ ] 电话 / WhatsApp：`+60163585326` 是否仍有效
+- [ ] 电话 / WhatsApp：`+60129802762` 是否仍有效
 - [ ] Email：`kmc63trading@gmail.com` 是否仍有效
 - [ ] 完整地址（英文）：
   `No.1, Jalan Com Industrial Park 2/1, Com Industrial Park 2, Kawasan Perindustrian Kg. Baru Balakong, 43300 Seri Kembangan, Selangor Darul Ehsan, Malaysia`

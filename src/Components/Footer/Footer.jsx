@@ -19,7 +19,7 @@ const Footer = () => {
                 <a href="https://www.facebook.com/profile.php?id=61558628079399" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faFacebook} />
                 </a>
-                <a href="https://wa.me/+60163585326" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/60129802762" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faWhatsapp} />
                 </a>
                 <a href="https://www.google.com/maps/place/KMC+63+Trading/@3.0389174,101.7488713,15z/data=!4m6!3m5!1s0x31cc3543def799d1:0x4badda68a84593da!8m2!3d3.0389174!4d101.7488713!16s%2Fg%2F11vx64wxn1?hl=en&entry=ttu" target="_blank" rel="noopener noreferrer">

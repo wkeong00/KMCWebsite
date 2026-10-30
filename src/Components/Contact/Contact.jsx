@@ -46,7 +46,7 @@ const Contact = () => {
                     <li><img src={mailicon} alt=""/>
                         kmc63trading@gmail.com</li>
                     <li><img src={phoneIcon} alt=""/>
-                        +60163585326</li>
+                        +60129802762</li>
                     <li><img src={locaIcon} alt=""/>
                         No.1, Jalan Com Industrial Park2/1, Com Industrial Park 2, kawasan Perindustrian
                         Kg.Baru Balakong, 43300 Seri Kembangan, Selangor Darul Ehsan. Malaysia</li>
