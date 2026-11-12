@@ -1,40 +1,29 @@
-import React, { useState, useRef } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
+import React from 'react';
 import { Check, ArrowRight, ShieldCheck, Thermometer, Layers, Droplets } from 'lucide-react';
 import { PageHero, useQuote } from '../Components/layout/SiteLayout';
 import { Button } from '../Components/ui/Primitives';
 import { serviceCopy } from '../data/services';
 import { images } from '../data/images';
 export default function ServicesPage() {
-  const [language, setLanguage] = useState('en');
-  const tabs = useRef([]);
+  const { t, language } = useLanguage();
   const copy = serviceCopy[language];
   const {
     requestQuote
   } = useQuote();
-  function keydown(event, index) {
-    let next = index;
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') next = 1 - index;else if (event.key === 'Home') next = 0;else if (event.key === 'End') next = 1;else return;
-    event.preventDefault();
-    setLanguage(next === 0 ? 'en' : 'zh');
-    tabs.current[next]?.focus();
-  }
   return <>
-  <PageHero label="Services" title={<>Made for your needs.<br />Finished for your work.</>} description="Two core specialties, one workshop. Custom trays and PTFE coating services, supported by maintenance and repair." image={images.coating} alt="A KMC technician applying a coating to a baking tray" />
+  <PageHero label={t("Services")} title={<>{t("Made for your needs.")}<br />{t("Finished for your work.")}</>} description={t("Two core specialties, one workshop. Custom trays and PTFE coating services, supported by maintenance and repair.")} image={images.coating} alt={t("A KMC technician applying a coating to a baking tray")} />
   <div className="service-toolbar">
     <div className="container service-toolbar__inner">
-      <nav aria-label="Service sections">
+      <nav aria-label={t("Service sections")}>
         {['coating', 'custom', 'maintenance'].map((id, i) => <a href={`#${id}`} key={id}>
           {copy.nav[i]}
         </a>)}
       </nav>
-      <div className="language-tabs" role="tablist" aria-label="Service content language">
-        {[['en', 'EN'], ['zh', '中文']].map(([lang, label], i) => <button type="button" role="tab" id={`language-${lang}`} aria-selected={language === lang} aria-controls="service-content" tabIndex={language === lang ? 0 : -1} ref={el => tabs.current[i] = el} key={lang} onKeyDown={e => keydown(e, i)} onClick={() => setLanguage(lang)}>
-          {label}
-        </button>)}
-      </div>
+
     </div>
   </div>
-  <div id="service-content" role="tabpanel" aria-labelledby={`language-${language}`} lang={language === 'zh' ? 'zh-Hans' : 'en'} className={`service-content ${language === 'zh' ? 'service-content--zh' : ''}`}>
+  <div id="service-content" lang={language === 'zh' ? 'zh-Hans' : 'en'} className={`service-content ${language === 'zh' ? 'service-content--zh' : ''}`}>
     <section id="coating" className="section service-detail">
       <div className="container">
         <div className="service-detail__grid">
@@ -51,7 +40,7 @@ export default function ServicesPage() {
             <ul className="check-list">
               {copy.coating.features.map(text => <li key={text}>
                 <Check size={17} aria-hidden="true" />
-                {text}
+                {t(text)}
               </li>)}
             </ul>
             <Button onClick={() => requestQuote('coating and refurbishment', 'Coating')}>
@@ -78,7 +67,7 @@ export default function ServicesPage() {
                 const Icon = [ShieldCheck, Thermometer, Layers, Droplets][i];
                 return <span key={text}>
               <Icon size={21} strokeWidth={1.5} aria-hidden="true" />
-              {text}
+              {t(text)}
             </span>;
               })}
           </div>

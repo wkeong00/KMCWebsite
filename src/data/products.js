@@ -1,3 +1,4 @@
+import { zh } from '../i18n/zh';
 import JS20108 from '../Assets/enhanced/JS20108.jpg';
 import JS20208 from '../Assets/enhanced/JS20208.jpg';
 import JS20308 from '../Assets/enhanced/JS20308.jpg';
@@ -87,5 +88,5 @@ export const products = [{
 export const categories = ['All', ...new Set(products.map(product => product.category))];
 export function filterProducts(category, query) {
   const term = query.trim().toLowerCase();
-  return products.filter(product => (category === 'All' || product.category === category) && `${product.model} ${product.desc} ${product.category}`.toLowerCase().includes(term));
+  return products.filter(product => (category === 'All' || product.category === category) && `${product.model} ${product.desc} ${product.category} ${zh[product.desc]} ${zh[product.category]}`.toLowerCase().includes(term));
 }

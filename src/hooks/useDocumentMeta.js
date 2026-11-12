@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/LanguageContext';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 const meta = {
@@ -7,12 +8,13 @@ const meta = {
   '/products': ['Baking Trays & Equipment', 'Explore KMC bun trays, steamers and bakery trolleys. Enquire about existing models or a custom fabrication solution.']
 };
 export default function useDocumentMeta() {
+  const { t } = useLanguage();
   const {
     pathname
   } = useLocation();
   useEffect(() => {
     const [title, description] = meta[pathname.toLowerCase()] || ['Page Not Found', 'Find custom baking trays, coating services and contact information for KMC 63 Trading.'];
-    document.title = `${title} | KMC 63 Trading`;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
-  }, [pathname]);
+    document.title = `${t(title)} | KMC 63 Trading`;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t(description));
+  }, [pathname, t]);
 }

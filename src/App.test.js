@@ -5,6 +5,7 @@ beforeAll(() => {
   Element.prototype.scrollIntoView = jest.fn();
 });
 beforeEach(() => {
+  localStorage.clear();
   window.matchMedia = jest.fn().mockReturnValue({ matches: true });
   process.env.REACT_APP_WEB3FORMS_KEY = 'test-public-key';
 });
@@ -93,34 +94,64 @@ test('product dialog traps focus, closes with Escape, restores its trigger and c
   expect(screen.getByLabelText("I'm interested in")).toHaveValue('Product');
   await waitFor(() => expect(screen.getByLabelText(/Your name/)).toHaveFocus());
 });
-test('service language tabs support keyboard selection and quote service selection', () => {
+test('global language switch translates services and quote fields', () => {
   open('/Services');
-  const english = screen.getByRole('tab', {
-    name: 'EN'
-  });
-  english.focus();
-  fireEvent.keyDown(english, {
-    key: 'ArrowRight'
-  });
-  expect(screen.getByRole('tab', {
-    name: '中文'
-  })).toHaveAttribute('aria-selected', 'true');
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('lang', 'zh-Hans');
+  fireEvent.click(screen.getByRole('button', { name: '中文' }));
+  expect(screen.getByRole('button', { name: '中文' })).toHaveAttribute('aria-pressed', 'true');
+  expect(document.documentElement).toHaveAttribute('lang', 'zh-Hans');
   expect(screen.getByRole('heading', {
     name: '为您的烤盘，换上新涂层。'
   })).toBeInTheDocument();
   fireEvent.click(screen.getAllByRole('button', {
     name: '咨询您的需求'
   })[0]);
-  expect(screen.getByLabelText("I'm interested in")).toHaveValue('Coating');
-  fireEvent.keyDown(screen.getByRole('tab', {
-    name: '中文'
-  }), {
-    key: 'Home'
-  });
+  expect(screen.getByLabelText('我感兴趣的服务')).toHaveValue('Coating');
+  expect(screen.getByLabelText(/告诉我们您的需求/)).toHaveValue('我想咨询涂层与翻新的报价。\n\n我的需求：');
+  fireEvent.click(screen.getByRole('button', { name: 'EN' }));
   expect(screen.getByRole('heading', {
     name: 'Give your trays a fresh start.'
   })).toBeInTheDocument();
+});
+
+test('language persists across routes and remounts, with Chinese product search', () => {
+  const view = open('/');
+  fireEvent.click(screen.getByRole('button', { name: '中文' }));
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('烤盘制作');
+  fireEvent.click(within(screen.getByRole('navigation', { name: '主导航' })).getByRole('link', { name: '关于我们' }));
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('经验融入工艺');
+  fireEvent.click(within(screen.getByRole('navigation', { name: '主导航' })).getByRole('link', { name: '产品' }));
+  fireEvent.change(screen.getByRole('searchbox'), { target: { value: '汉堡' } });
+  expect(screen.getByRole('status')).toHaveTextContent('1 件产品');
+  expect(screen.getByRole('button', { name: /查看 JS20308/ })).toBeInTheDocument();
+  expect(document.title).toBe('烤盘与烘焙设备 | KMC 63 Trading');
+  view.unmount();
+  open('/Products');
+  expect(screen.getByRole('button', { name: '中文' })).toHaveAttribute('aria-pressed', 'true');
+  expect(screen.getByRole('status')).toHaveTextContent('12 件产品');
+  fireEvent.change(screen.getByLabelText(/您的姓名/), { target: { value: '测试' } });
+  fireEvent.click(screen.getByRole('button', { name: 'EN' }));
+  expect(screen.getByLabelText(/Your name/)).toHaveValue('测试');
+  expect(screen.getByRole('status')).toHaveTextContent('12 products');
+});
+
+test('bilingual pages retain the remote brand, refreshed images and contact number', () => {
+  open('/Products');
+  for (const language of ['EN', '中文']) {
+    fireEvent.click(screen.getByRole('button', { name: language }));
+    const header = screen.getByRole('banner');
+    expect(within(header).getByRole('img', { name: 'KMC 63 Trading' })).toHaveAttribute('src', 'kmc-logo.svg');
+    expect(within(screen.getByRole('contentinfo')).getByRole('img', { name: 'KMC 63 Trading' })).toHaveAttribute('src', 'kmc-logo-light.svg');
+    const product = screen.getByRole('button', { name: /(?:View|查看) JS20108:/ });
+    expect(within(product).getByRole('img')).toHaveAttribute('src', 'JS20108.jpg');
+    fireEvent.click(product);
+    const whatsappLink = within(screen.getByRole('dialog')).getByRole('link', { name: /WhatsApp/ });
+    expect(whatsappLink).toHaveAttribute('href', expect.stringContaining('https://wa.me/60129802762?text='));
+    expect(decodeURIComponent(whatsappLink.getAttribute('href'))).toContain('JS20108');
+    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
+    for (const link of screen.getAllByRole('link').filter(link => link.getAttribute('href')?.startsWith('tel:'))) {
+      expect(link).toHaveAttribute('href', 'tel:+60129802762');
+    }
+  }
 });
 test('mobile navigation closes with Escape and returns focus to its opener', () => {
   open('/');

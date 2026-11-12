@@ -1,8 +1,12 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import React, { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, ArrowRight, LoaderCircle, MessageCircle } from 'lucide-react';
 import { ContactDetails, useQuote } from '../layout/SiteLayout';
 import { site, whatsapp } from '../../data/site';
 export default function ContactSection() {
+  const { t, language } = useLanguage();
+  const quoteLanguage = useRef({ language, t });
+  quoteLanguage.current = { language, t };
   const {
     quote
   } = useQuote();
@@ -14,8 +18,9 @@ export default function ContactSection() {
   const controller = useRef(null);
   useEffect(() => {
     if (quote) {
+      const { language, t } = quoteLanguage.current;
       setService(quote.service);
-      setMessage(quote.context ? `I would like a quote for ${quote.context}.\n\nMy requirements: ` : '');
+      setMessage(quote.context ? language === 'zh' ? `我想咨询${t(quote.context)}的报价。\n\n我的需求：` : `I would like a quote for ${quote.context}.\n\nMy requirements: ` : '');
       setStatus('idle');
       setError('');
     }
@@ -63,68 +68,68 @@ export default function ContactSection() {
   return <section id="contact" className="section contact-section">
   <div className="container contact-grid">
     <div className="contact-copy">
-      <p className="eyebrow">Start a conversation</p>
-      <h2>Good work starts<br />with your requirements.</h2>
-      <p className="lead">A new tray, a fresh coating, or a custom idea. Share what you need and let's work through the details.</p>
+      <p className="eyebrow">{t("Start a conversation")}</p>
+      <h2>{t("Good work starts")}<br />{t("with your requirements.")}</h2>
+      <p className="lead">{t("A new tray, a fresh coating, or a custom idea. Share what you need and let's work through the details.")}</p>
       <ContactDetails />
       <details className="contact-map">
-        <summary>Find our workshop on the map</summary>
-        <iframe title="KMC 63 Trading workshop location" src={site.mapEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+        <summary>{t("Find our workshop on the map")}</summary>
+        <iframe title={t("KMC 63 Trading workshop location")} src={site.mapEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
       </details>
-      <a className="text-link" href={whatsapp(quote?.context)} target="_blank" rel="noreferrer"><MessageCircle size={18} aria-hidden="true" />Prefer WhatsApp? Chat with us<ArrowRight size={16} aria-hidden="true" /></a>
+      <a className="text-link" href={whatsapp(quote?.context)} target="_blank" rel="noreferrer"><MessageCircle size={18} aria-hidden="true" />{t("Prefer WhatsApp? Chat with us")}<ArrowRight size={16} aria-hidden="true" /></a>
     </div>
     <div className="contact-form-wrap">
       <div className="form-heading">
-        <h3>Request a quote</h3>
-        <span>Let's make it happen.</span>
+        <h3>{t("Request a quote")}</h3>
+        <span>{t("Let's make it happen.")}</span>
       </div>
-      <form onSubmit={submit} aria-label="Request a quote" aria-busy={status === 'sending'}>
+      <form onSubmit={submit} aria-label={t("Request a quote")} aria-busy={status === 'sending'}>
         <div className="form-row">
           <div className="field">
-            <label htmlFor="contact-name">Your name <span>*</span></label>
-            <input id="contact-name" name="name" autoComplete="name" placeholder="Full name" required maxLength={120} />
+            <label htmlFor="contact-name">{t("Your name")}<span>*</span></label>
+            <input id="contact-name" name="name" autoComplete="name" placeholder={t("Full name")} required maxLength={120} />
           </div>
           <div className="field">
-            <label htmlFor="contact-company">Company</label>
-            <input id="contact-company" name="company" autoComplete="organization" placeholder="Company name" maxLength={160} />
+            <label htmlFor="contact-company">{t("Company")}</label>
+            <input id="contact-company" name="company" autoComplete="organization" placeholder={t("Company name")} maxLength={160} />
           </div>
         </div>
         <div className="form-row">
           <div className="field">
-            <label htmlFor="contact-phone">Phone number <span>*</span></label>
+            <label htmlFor="contact-phone">{t("Phone number")}<span>*</span></label>
             <input id="contact-phone" name="phone" type="tel" autoComplete="tel" placeholder="+60" required maxLength={40} />
           </div>
           <div className="field">
-            <label htmlFor="contact-email">Email</label>
+            <label htmlFor="contact-email">{t("Email")}</label>
             <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="you@company.com" maxLength={200} />
           </div>
         </div>
         <div className="field">
-          <label htmlFor="contact-service">I'm interested in</label>
+          <label htmlFor="contact-service">{t("I'm interested in")}</label>
           <select id="contact-service" name="service" value={service} onChange={e => setService(e.target.value)}>
-            <option value="Other">Select a service / General enquiry</option>
-            <option value="Coating">Coating & refurbishment</option>
-            <option value="Custom">Custom fabrication</option>
-            <option value="Product">A product</option>
-            <option value="Maintenance">Maintenance & repair</option>
+            <option value="Other">{t("Select a service / General enquiry")}</option>
+            <option value="Coating">{t("Coating & refurbishment")}</option>
+            <option value="Custom">{t("Custom fabrication")}</option>
+            <option value="Product">{t("A product")}</option>
+            <option value="Maintenance">{t("Maintenance & repair")}</option>
           </select>
         </div>
         <div className="field">
-          <label htmlFor="contact-message">Tell us what you need <span>*</span></label>
-          <textarea id="contact-message" name="message" rows={4} value={message} onChange={e => setMessage(e.target.value)} placeholder="Tray dimensions, quantity, material or coating requirements…" required maxLength={5000} />
+          <label htmlFor="contact-message">{t("Tell us what you need")}<span>*</span></label>
+          <textarea id="contact-message" name="message" rows={4} value={message} onChange={e => setMessage(e.target.value)} placeholder={t("Tray dimensions, quantity, material or coating requirements…")} required maxLength={5000} />
         </div>
         <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" hidden aria-hidden="true" />
-        <p className="form-note">Your details will only be used to respond to your enquiry.</p>
+        <p className="form-note">{t("Your details will only be used to respond to your enquiry.")}</p>
         <button type="submit" className="button button--primary form-submit" disabled={status === 'sending'}>
-          {status === 'sending' ? <>Sending enquiry <LoaderCircle className="spinner" size={17} /></> : <>Send enquiry <ArrowRight size={17} aria-hidden="true" /></>}
+          {status === 'sending' ? <>{t("Sending enquiry")}<LoaderCircle className="spinner" size={17} /></> : <>{t("Send enquiry")}<ArrowRight size={17} aria-hidden="true" /></>}
         </button>
         <div className="form-feedback" aria-live="polite" aria-atomic="true">
           {status === 'success' && <div className="form-success">
             <CheckCircle2 size={22} aria-hidden="true" />
-            <span><strong>Thank you for your enquiry.</strong><br />Your message has been sent to KMC 63 Trading.</span>
+            <span><strong>{t("Thank you for your enquiry.")}</strong><br />{t("Your message has been sent to KMC 63 Trading.")}</span>
           </div>}
           {status === 'error' && <p className="form-error">
-            {error}
+            {t(error)}
           </p>}
         </div>
       </form>

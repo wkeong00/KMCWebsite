@@ -1,3 +1,4 @@
+import { useLanguage, LanguageProvider } from './i18n/LanguageContext';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer, CTABand, NotFound, QuoteProvider, RouteEffects } from './Components/layout/SiteLayout';
@@ -8,11 +9,12 @@ import ServicesPage from './pages/ServicesPage';
 import ProductsPage from './pages/ProductsPage';
 import useDocumentMeta from './hooks/useDocumentMeta';
 function Site() {
+  const { t } = useLanguage();
   useDocumentMeta();
   return <QuoteProvider>
   <RouteEffects />
   <div id="site-shell">
-    <a className="skip-link" href="#main-content">Skip to content</a>
+    <a className="skip-link" href="#main-content">{t("Skip to content")}</a>
     <Navbar />
     <main id="main-content" tabIndex={-1}>
       <Routes>
@@ -34,6 +36,6 @@ export default function App() {
     v7_startTransition: true,
     v7_relativeSplatPath: true
   }}>
-  <Site />
+  <LanguageProvider><Site /></LanguageProvider>
   </BrowserRouter>;
 }
