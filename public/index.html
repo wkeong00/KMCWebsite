@@ -10,6 +10,28 @@
    gtag('js', new Date());
    gtag('config', 'AW-18562159807');
   </script>
+  <!-- Contact conversion: WhatsApp, phone and email link clicks. -->
+  <script>
+   function gtag_report_conversion() {
+    try {
+     if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+       'send_to': 'AW-18562159807/fRo_CIaQnrcdEL-pkJNF'
+      });
+     }
+    } catch (error) {
+     // Contact links must still work if tracking is unavailable.
+    }
+   }
+   document.addEventListener('click', function (event) {
+    var link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (/^(tel:|mailto:|https:\/\/wa\.me\/)/i.test(href)) {
+     gtag_report_conversion();
+    }
+   }, true);
+  </script>
   <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 256x256" href="%PUBLIC_URL%/favicon.ico" />
   <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/favicon-96.png" />
   <link rel="icon" type="image/svg+xml" sizes="any" href="%PUBLIC_URL%/favicon.svg" />
