@@ -145,11 +145,11 @@ test('bilingual pages retain the remote brand, refreshed images and contact numb
     expect(within(product).getByRole('img')).toHaveAttribute('src', 'JS20108.jpg');
     fireEvent.click(product);
     const whatsappLink = within(screen.getByRole('dialog')).getByRole('link', { name: /WhatsApp/ });
-    expect(whatsappLink).toHaveAttribute('href', expect.stringContaining('https://wa.me/60129802762?text='));
+    expect(whatsappLink).toHaveAttribute('href', expect.stringContaining('https://wa.me/60123989909?text='));
     expect(decodeURIComponent(whatsappLink.getAttribute('href'))).toContain('JS20108');
     fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
     for (const link of screen.getAllByRole('link').filter(link => link.getAttribute('href')?.startsWith('tel:'))) {
-      expect(link).toHaveAttribute('href', 'tel:+60129802762');
+      expect(link).toHaveAttribute('href', 'tel:+60123989909');
     }
   }
 });
